@@ -5,6 +5,10 @@ const socketIO = require('socket.io');
 const path = require('path');
 
 
+var mysql = require('mysql');
+var scrambler = require('./js/scrambler.js');
+var pochmann = require('./matrixManip/matrixManip5.js');
+
 
 const PORT = process.env.PORT || 5000;
 // const INDEX = path.join(__dirname, '/views/index.html');
@@ -32,6 +36,22 @@ const server = express()
 
 const io = socketIO(server);
 
+var db_name = "b18_19015896_rubiksbattle";
+
+var connection = mysql.createConnection({  
+  host     : 'sql311.byethost18.com',  
+  user     : 'b18_19015896',  
+  password : '54072440',  
+  database : db_name  
+}); 
+
+connection.connect(function(err){
+  if(err){
+    console.log('Database connection error' + err);
+  }else{
+    console.log('Database connection successful');
+  }
+});
 
 io.sockets.on('connection', function (socket) {
 		 console.log('Client connected hehe');

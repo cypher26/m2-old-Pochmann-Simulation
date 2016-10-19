@@ -1,80 +1,45 @@
 
-	var tpad = document.getElementById('tpad');
-
-
+	// var tpad = document.getElementById('tpad');
 	var dimen = 3;
 	var arrayCube =[];
-	var allMovesP1 ='';
+	
 	var dimenLet = ['U','F','D','B','L','R'];
-
-	var rD = [0,1,2,3]; //Direction
-	var rDp = [3,2,1,0];
-	var uD = [4,1,5,3];
-	var uDp = [3,5,1,4];
-	var fDp = [0,5,2,4];
-	var fD = [4,2,5,0];
-
-
 matrixInit();
 function matrixInit(){
-
-		for (var z = 0;z<dimenLet.length;z++){
-			arrayCube[z]=[];
-			
-			for (x = 1;x<=dimen;x++){
-				arrayCube[z][x]=[];
-				for (y=1;y<=dimen;y++){
-					arrayCube[z][x][y] = [];
-					arrayCube[z][x][y][0]=dimenLet[z];
-					arrayCube[z][x][y][1]=x;
-					arrayCube[z][x][y][2]=y;
-					arrayCube[z][x][y][3]=dimenLet[z];
-					arrayCube[z][x][y][4]=x;
-					arrayCube[z][x][y][5]=y;
-					
-					
-					
-				}
+	for (z = 0;z<dimenLet.length;z++){
+		arrayCube[z]=[];
+		
+		for (x = 1;x<=dimen;x++){
+			arrayCube[z][x]=[];
+			for (y=1;y<=dimen;y++){
+				arrayCube[z][x][y] = [];
+				arrayCube[z][x][y][0]=dimenLet[z];
+				arrayCube[z][x][y][1]=x;
+				arrayCube[z][x][y][2]=y;
+				arrayCube[z][x][y][3]=dimenLet[z];
+				arrayCube[z][x][y][4]=x;
+				arrayCube[z][x][y][5]=y;
+				
+				
 				
 			}
-
-			
 			
 		}
-		// tpad.innerHTML+='<br>';
-			// printArrayCube();
 
-}
-
-// for (var z = 0;z<dimenLet.length;z++){
-// 	arrayCube[z]=[];
-	
-// 	for (x = 1;x<=dimen;x++){
-// 		arrayCube[z][x]=[];
-// 		for (y=1;y<=dimen;y++){
-// 			arrayCube[z][x][y] = [];
-// 			arrayCube[z][x][y][0]=dimenLet[z];
-// 			arrayCube[z][x][y][1]=x;
-// 			arrayCube[z][x][y][2]=y;
-// 			arrayCube[z][x][y][3]=dimenLet[z];
-// 			arrayCube[z][x][y][4]=x;
-// 			arrayCube[z][x][y][5]=y;
-			
-			
-			
-// 		}
 		
-// 	}
-
-	
-	
-// }
-
- // tpad.innerHTML+='<br>';
+		
+	}
+}
+// tpad.innerHTML+='<br>';
 
 
 
-
+var rD = [0,1,2,3]; //Direction
+var rDp = [3,2,1,0];
+var uD = [4,1,5,3];
+var uDp = [3,5,1,4];
+var fDp = [0,5,2,4];
+var fD = [4,2,5,0];
 //yAxisMatrix(3,rD);
 function yAxisMatrix(sW,aD){ //y axis width
 	tempWing=[];
@@ -279,7 +244,7 @@ arrayCube = transposeMatrix(arrayCube,3);
 
 
 
-// //printArrayCube();
+// printArrayCube();
 
 
 
@@ -294,265 +259,130 @@ function execMove(alg){
 	//var alg = document.getElementById('inputAlg').value
 	//alert(alg);
 	switch(alg){
-	
 		case 'M':
-			if (dimen%2 == 1)
-			yAxisMatrix(Math.round(dimen/2),rDp);
-			//printArrayCube();
+			yAxisMatrix(2,rDp);
+			// printArrayCube();
 			break;
 				case 'M2':
-						if (dimen%2 == 1){
-					yAxisMatrix(Math.round(dimen/2),rDp);
-					yAxisMatrix(Math.round(dimen/2),rDp);
-						}
-					//printArrayCube();
+					yAxisMatrix(2,rDp);
+					yAxisMatrix(2,rDp);
+					// printArrayCube();
 					break;
 		case 'Mp':
-				if (dimen%2 == 1)
-			yAxisMatrix(Math.round(dimen/2),rD);
-			//printArrayCube();
+			yAxisMatrix(2,rD);
+			// printArrayCube();
 			break;
-
-		case 'E':
-				if (dimen%2 == 1)
-			xAxisMatrix(Math.round(dimen/2),uDp);
-			//printArrayCube();
-			break;
-				case 'E2':
-				if (dimen%2 == 1){
-					xAxisMatrix(Math.round(dimen/2),uDp);
-					xAxisMatrix(Math.round(dimen/2),uDp);
-				}
-					//printArrayCube();
-					break;
-		case 'Ep':
-			if (dimen%2 == 1)
-			xAxisMatrix(Math.round(dimen/2),uD);
-			//printArrayCube();
-			break;
-
-		case 'S':
-			if (dimen%2 == 1)
-			zAxisMatrix(Math.round(dimen/2),fD);
-		
-			//printArrayCube();
-			break;
-				case 'S2':
-				if (dimen%2 == 1){
-					zAxisMatrix(Math.round(dimen/2),fD);
-					zAxisMatrix(Math.round(dimen/2),fD);
-				}
-					//printArrayCube();
-			break;
-		case 'Sp':
-			if (dimen%2 == 1)
-			zAxisMatrix(Math.round(dimen/2),fDp);
-			//printArrayCube();
-			break;
-
-
-
-
 		case 'R':
-			yAxisMatrix(dimen,rD);
+			yAxisMatrix(3,rD);
 			rotateMatrix(arrayCube,5);
-			//printArrayCube();
+			// printArrayCube();
 			break;
 				case 'R2':
-					yAxisMatrix(dimen,rD);
+					yAxisMatrix(3,rD);
 					rotateMatrix(arrayCube,5);
-					yAxisMatrix(dimen,rD);
+					yAxisMatrix(3,rD);
 					rotateMatrix(arrayCube,5);
-					//printArrayCube();
+					// printArrayCube();
 					break;
 		case 'Rp':
-			yAxisMatrix(dimen,rDp);
+			yAxisMatrix(3,rDp);
 			rotateMatrixP(arrayCube,5);
-			//printArrayCube();
+			// printArrayCube();
 			break;
 		
-
-
-
 		case 'L':
 			yAxisMatrix(1,rDp);
 			rotateMatrix(arrayCube,4);
-			//printArrayCube();	
+			// printArrayCube();	
 			break;
 				case 'L2':
 					yAxisMatrix(1,rDp);
 					rotateMatrix(arrayCube,4);
 					yAxisMatrix(1,rDp);
 					rotateMatrix(arrayCube,4);
-					//printArrayCube();	
+					// printArrayCube();	
 					break;
 
 		case 'Lp':
 			yAxisMatrix(1,rD);
 			rotateMatrixP(arrayCube,4);
-			//printArrayCube();
+			// printArrayCube();
 			break;
 		case 'U':
 			xAxisMatrix(1,uD);
 			rotateMatrix(arrayCube,0);
-			//printArrayCube();
+			// printArrayCube();
 			break;
 				case 'U2':
 					xAxisMatrix(1,uD);
 					rotateMatrix(arrayCube,0);
 					xAxisMatrix(1,uD);
 					rotateMatrix(arrayCube,0);
-					//printArrayCube();
+					// printArrayCube();
 					break;	
 		case 'Up':
 			xAxisMatrix(1,uDp);
 			rotateMatrixP(arrayCube,0);
-			//printArrayCube();
+			// printArrayCube();
 			break;
 		case 'D':
-			xAxisMatrix(dimen,uDp);
+			xAxisMatrix(3,uDp);
 			rotateMatrix(arrayCube,2);
-			//printArrayCube();
+			// printArrayCube();
 			break;
 				case 'D2':
-					xAxisMatrix(dimen,uDp);
+					xAxisMatrix(3,uDp);
 					rotateMatrix(arrayCube,2);
-					xAxisMatrix(dimen,uDp);
+					xAxisMatrix(3,uDp);
 					rotateMatrix(arrayCube,2);
-					//printArrayCube();
+					// printArrayCube();
 					break;
 		case 'Dp':
-			xAxisMatrix(dimen,uD);
+			xAxisMatrix(3,uD);
 			rotateMatrixP(arrayCube,2);
-			//printArrayCube();
+			// printArrayCube();
 			break;
 		case 'F':
-			zAxisMatrix(dimen,fD);
+			zAxisMatrix(3,fD);
 			rotateMatrix(arrayCube,1);
-			//printArrayCube();
+			// printArrayCube();
 			break;
 				case 'F2':
-					zAxisMatrix(dimen,fD);
+					zAxisMatrix(3,fD);
 					rotateMatrix(arrayCube,1);
-					zAxisMatrix(dimen,fD);
+					zAxisMatrix(3,fD);
 					rotateMatrix(arrayCube,1);
-					//printArrayCube();
+					// printArrayCube();
 			break;
 		case 'Fp':
-			zAxisMatrix(dimen,fDp);
+			zAxisMatrix(3,fDp);
 			rotateMatrixP(arrayCube,1);
-			//printArrayCube();
+			// printArrayCube();
 			break;
 		case 'B':
 			zAxisMatrix(1,fDp);
 			rotateMatrix(arrayCube,3);
-			//printArrayCube();
+			// printArrayCube();
 			break;
 				case 'B2':
 					zAxisMatrix(1,fDp);
 					rotateMatrix(arrayCube,3);
 					zAxisMatrix(1,fDp);
 					rotateMatrix(arrayCube,3);
-					//printArrayCube();
+					// printArrayCube();
 					break;
 		case 'Bp':
 			zAxisMatrix(1,fD);
 			rotateMatrixP(arrayCube,3);
-			//printArrayCube();
+			// printArrayCube();
 			break;
-
-		case 'y':
-			for (var i=1;i<=dimen;i++){
-				xAxisMatrix(i,uD);
-			}
-			rotateMatrix(arrayCube,0);
-			rotateMatrixP(arrayCube,2);
-			break;
-				case 'y2':
-					for (var i=1;i<=dimen;i++){
-						xAxisMatrix(i,uD);
-					}
-					rotateMatrix(arrayCube,0);
-					rotateMatrixP(arrayCube,2);
-
-					for (var i=1;i<=dimen;i++){
-						xAxisMatrix(i,uD);
-					}
-					rotateMatrix(arrayCube,0);
-					rotateMatrixP(arrayCube,2);
-				break;
-		case 'yp':
-			for (var i=1;i<=dimen;i++){
-				xAxisMatrix(i,uDp);
-			}
-			rotateMatrixP(arrayCube,0);
-			rotateMatrix(arrayCube,2);
-			break;
-
-		case 'x':
-			for (var i=1;i<=dimen;i++){
-				yAxisMatrix(i,rD);
-			}
-			rotateMatrix(arrayCube,5);
-			rotateMatrixP(arrayCube,4);
-			break;
-				case 'x2':
-					for (var i=1;i<=dimen;i++){
-						yAxisMatrix(i,rD);
-					}
-					rotateMatrix(arrayCube,5);
-					rotateMatrixP(arrayCube,4);
-
-					for (var i=1;i<=dimen;i++){
-						yAxisMatrix(i,rD);
-					}
-					rotateMatrix(arrayCube,5);
-					rotateMatrixP(arrayCube,4);
-				break;
-		case 'xp':
-			for (var i=1;i<=dimen;i++){
-				yAxisMatrix(i,rDp);
-			}
-			rotateMatrixP(arrayCube,5);
-			rotateMatrix(arrayCube,4);
-			break;
-
-		case 'z':
-			for (var i=1;i<=dimen;i++){
-				zAxisMatrix(i,fD);
-			}
-			rotateMatrix(arrayCube,1);
-			rotateMatrixP(arrayCube,3);
-			break;
-				case 'z2':
-					for (var i=1;i<=dimen;i++){
-						zAxisMatrix(i,fD);
-					}
-					rotateMatrix(arrayCube,1);
-					rotateMatrixP(arrayCube,3);
-					
-					for (var i=1;i<=dimen;i++){
-						zAxisMatrix(i,fD);
-					}
-					rotateMatrix(arrayCube,1);
-					rotateMatrixP(arrayCube,3);
-				break;
-		case 'zp':
-		for (var i=1;i<=dimen;i++){
-			zAxisMatrix(i,fDp);
-		}
-		rotateMatrixP(arrayCube,1);
-		rotateMatrix(arrayCube,3);
-		break;	
 	}
 }
 
 
-// execPerm('R');
-// printArrayCube();
 
 function printArrayCube(){
-	tpad.innerHTML = '';
+	// tpad.innerHTML = '';
 for (z = 0;z<dimenLet.length;z++){
 	for (x = 1;x<=dimen;x++){
 		for (y=1;y<=dimen;y++){
@@ -583,11 +413,10 @@ function execPerm(str){
 
 		}
 }
-	cornerCheck = [];
-	cornerSolution = '';
+
 
 function execCornerBufferAlg(str){
-	parity = false;
+	parity=false;
 	matrixInit();
 	cornerSolution = '';
 	for (x=0;x<8;x++){
@@ -624,7 +453,7 @@ function execCornerBufferAlg(str){
 					case 'E':
 						if (completeCheck==1){
 							//end loop
-							console.log('finish');
+							// console.log('finish');
 							break;
 						}
 						else{
@@ -656,27 +485,26 @@ function execCornerBufferAlg(str){
 		// for (x=0;x<8;x++){
 		// 	console.log(x + " " + cornerCheck[x]);
 		// }
-		$('#hSolution').html($('#hSolution').html() + " " + cornerLetter);
 
-		console.log(cornerLetter + " = " + cornerAlg);
+	
+	 	
+			// console.log(cornerLetter);
 			str = cornerAlg;
 			cornerSolution+=cornerAlg + " ";
-
-
-			sequenceAlgo[sequenceInc] = cornerSolution;
-			sequenceInc++;
 			execPerm(str);
-
 	}
-	
-	console.log('z='+z);
+	// alert(cornerSolution);
+
+	// console.log('z='+z);
+	// console.log('z='+z);
 	if (z%2==0){
 		parity = true;
 		execPerm(cornerArray[3][2]);
 		cornerSolution+=cornerArray[3][2] + " ";
 		
 	}
-	// console.log(cornerSolution);
+		return cornerSolution;
+
 }
 
 ///---------------corner----------------
@@ -684,8 +512,11 @@ var cornerSolution='';
 var corner=['ARE','BNQ','CJM','DIF','PKV','GLU','XHS','OTW'];
 var cornerCheck=[];
 var cornerLetter,cornerAlg;
-var concatPerm ="R U' R' U' R U R' F' R U R' U' R' F R";
 var parity;
+var concatPerm ="R U' R' U' R U R' F' R U R' U' R' F R";
+for (x=0;x<8;x++){
+	cornerCheck[x]=0;
+}
 if (dimen ==3){
 var cornerArray=[['U11','A',''],
 			 ['B31','R',''],
@@ -744,7 +575,9 @@ var edgeSolution = '';
 var edge=['KU','AQ','BM','CI','DE','NT','JP','LF','HR','SW','OV','GX']
 var edgeCheck=[];
 var edgeLetter,edgeAlg;
-
+for (x=0;x<edge.length;x++){
+	edgeCheck[x]=0;
+}
 var edgeArray=[['F32','K',''],['D12','U',''],
 			 ['U12','A','M2'],
 			 ['U23','B',"R' U R U' M2 U R' U' R"],
@@ -772,14 +605,10 @@ var edgeArray=[['F32','K',''],['D12','U',''],
 
 
 function execEdgeBufferAlg(str){
-	sequenceAlgo[sequenceInc] = ".";
-	sequenceInc++;
-
 	edgeSolution = '';
 	for (x=0;x<edge.length;x++){
 	edgeCheck[x]=0;
 	}
-
 	var completeCheck=0;
 	//completeCheck==0
 	for (var z=1;completeCheck==0;z++){
@@ -796,6 +625,8 @@ function execEdgeBufferAlg(str){
 	  		}
 
 	  	}
+	  	//console.log(edgeLetter);
+//var edge=['KU','AQ','BM','CI','DE','NT','JP','LF','HR','SW','OV','GX']
 
 
 			completeCheck=1;
@@ -838,7 +669,7 @@ function execEdgeBufferAlg(str){
 										for (i=1;i<edge.length;i++){
 											if (edgeCheck[i]==0){
 													edgeLetter = edge[i].charAt(0);
-													// console.log('edge = ' + edgeLetter);
+													console.log('edge = ' + edgeLetter);
 													if ( (z%2 == 0 && edgeLetter == 'C')){ edgeLetter='W';
 													  	for (var x=0;x<edgeArray.length;x++){
 													  		if (edgeLetter == edgeArray[x][1]){
@@ -883,23 +714,37 @@ function execEdgeBufferAlg(str){
 		// 	console.log(x + " " + edgeCheck[x]);
 		// }
 
+	
 
-$('#hSolution').html($('#hSolution').html() + " " + edgeLetter);
-			console.log(edgeLetter + " = " + edgeAlg);
+
+			// console.log(edgeLetter);
 			str = edgeAlg;
 		edgeSolution+=edgeAlg + " ";
-
-		sequenceAlgo[sequenceInc] = ". " +  cornerSolution + edgeSolution;
-			sequenceInc++;
 		execPerm(str);
 	}
 	if (parity){
 		edgeSolution+="M2 y L2 R U R' U' R' F R2 U' R' U' R U R' F' L2 ";
 		// execPerm("M2 y L2 R U R' U' R' F R2 U' R' U' R U R' F' L2 ");
 	}
+	return edgeSolution;
 	// console.log(edgeSolution);
 	
 
 	//execMove('');
 }
 
+this.solve=function (scramble)
+{
+    return  execCornerBufferAlg(scramble) + execEdgeBufferAlg('');
+}
+
+
+// console.log(cornerCheck[0]);
+// </script>
+// <input type='text' placeholder='sample' id='inputAlg'></input>
+// <button onClick="execCornerBufferAlg(document.getElementById('inputAlg').value);">Corner</button>
+// <button onClick="execPerm(document.getElementById('inputAlg').value);">Move</button>
+// <button onClick="execEdgeBufferAlg('');">Edge</button>
+
+// </body>
+// </html>

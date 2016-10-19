@@ -1,0 +1,236 @@
+<html>
+<body>
+
+<div id='tpad'>
+
+</div>
+<script>
+	var tpad = document.getElementById('tpad');
+	var dimen = 3;
+	var arrayCube =[];
+	
+	var dimenLet = ['U','F','D','B','L','R'];
+	
+for (z = 0;z<dimenLet.length;z++){
+	arrayCube[z]=[];
+	
+	for (x = 1;x<=dimen;x++){
+		arrayCube[z][x]=[];
+		for (y=1;y<=dimen;y++){
+			arrayCube[z][x][y] = [];
+			arrayCube[z][x][y][0]=dimenLet[z];
+			arrayCube[z][x][y][1]=x;
+			arrayCube[z][x][y][2]=y;
+			arrayCube[z][x][y][3]=dimenLet[z];
+			arrayCube[z][x][y][4]=x;
+			arrayCube[z][x][y][5]=y;
+			
+			
+			
+		}
+		
+	}
+
+	
+	
+}tpad.innerHTML+='<br>';
+
+
+
+var rD = [0,1,2,3]; //Direction
+var rDp = [3,2,1,0];
+var uD = [4,1,5,3];
+var uDp = [3,5,1,4];
+
+
+//yAxisMatrix(1,rD);
+function yAxisMatrix(sW,aD){ //y axis width
+	tempWing=[];
+		for (x = 1;x<=dimen;x++){
+				tempWing[x] = [];
+					tempWing[x][1] = arrayCube[aD[0]][x][sW][3];
+					tempWing[x][2] = arrayCube[aD[0]][x][sW][4];
+					tempWing[x][3] = arrayCube[aD[0]][x][sW][5];
+			}
+		for (z = 0;z<rD.length-1;z++){
+			for (x = 1;x<=dimen;x++){
+					arrayCube[aD[z]][x][sW][3]=arrayCube[aD[z+1]][x][sW][3];
+					arrayCube[aD[z]][x][sW][4]=arrayCube[aD[z+1]][x][sW][4];
+					arrayCube[aD[z]][x][sW][5]=arrayCube[aD[z+1]][x][sW][5];
+			}
+		}
+		for (x = 1;x<=dimen;x++){
+					arrayCube[aD[3]][x][sW][3]=tempWing[x][1];
+					arrayCube[aD[3]][x][sW][4]=tempWing[x][2];
+					arrayCube[aD[3]][x][sW][5]=tempWing[x][3];
+			}
+}
+//arrayCube[5][1][1][3]=0;
+//xAxisMatrix(1,uD);
+
+function xAxisMatrix(sW,aD){ //y axis width
+	tempWing= [];
+
+
+	///inverse facelet double
+		for (x = dimen,xT = 1;x>=1;xT++,x--){
+			tempWing[xT] = [];
+			for (y=dimen,yT = 1;y>=1;yT++,y--){
+				tempWing[xT][yT] = [];
+				tempWing[xT][yT][1] =arrayCube[3][x][y][3];
+				tempWing[xT][yT][2] =arrayCube[3][x][y][4];
+				tempWing[xT][yT][3] =arrayCube[3][x][y][5];
+			}
+		}
+		for(x =1;x<=dimen;x++){
+			for (y=1;y<=dimen;y++){
+				arrayCube[3][x][y][3] = tempWing[x][y][1];
+				arrayCube[3][x][y][4] = tempWing[x][y][2];
+				arrayCube[3][x][y][5] = tempWing[x][y][3];
+				
+			}
+		}
+	///////////////////////////////	
+ 			for (x = 1;x<=dimen;x++){
+				tempWing[x] = [];
+					tempWing[x][1] = arrayCube[aD[0]][sW][x][3];
+					tempWing[x][2] = arrayCube[aD[0]][sW][x][4];
+					tempWing[x][3] = arrayCube[aD[0]][sW][x][5];
+
+			}
+
+		for (z = 0;z<rD.length-1;z++){
+			for (x = 1;x<=dimen;x++){
+					arrayCube[aD[z]][sW][x][3]=arrayCube[aD[z+1]][sW][x][3];
+					arrayCube[aD[z]][sW][x][4]=arrayCube[aD[z+1]][sW][x][4];
+					arrayCube[aD[z]][sW][x][5]=arrayCube[aD[z+1]][sW][x][5];
+			}
+		}
+		for (x = 1;x<=dimen;x++){
+					arrayCube[aD[3]][sW][x][3]=tempWing[x][1];
+					arrayCube[aD[3]][sW][x][4]=tempWing[x][2];
+					arrayCube[aD[3]][sW][x][5]=tempWing[x][3];
+			}
+			
+			
+			
+	///inverse facelet double
+		for (x = dimen,xT = 1;x>=1;xT++,x--){
+			tempWing[xT] = [];
+			for (y=dimen,yT = 1;y>=1;yT++,y--){
+				tempWing[xT][yT] = [];
+				tempWing[xT][yT][1] =arrayCube[3][x][y][3];
+				tempWing[xT][yT][2] =arrayCube[3][x][y][4];
+				tempWing[xT][yT][3] =arrayCube[3][x][y][5];
+			}
+		}
+		for(x =1;x<=dimen;x++){
+			for (y=1;y<=dimen;y++){
+				arrayCube[3][x][y][3] = tempWing[x][y][1];
+				arrayCube[3][x][y][4] = tempWing[x][y][2];
+				arrayCube[3][x][y][5] = tempWing[x][y][3];
+				
+			}
+		}
+	///////////////////////////////	
+}
+var fD = [4,0,5,2];
+var fDp = [2,5,0,4];
+zAxisMatrix(3,fD);
+function zAxisMatrix(sW,aD){ 
+	tempWing=[];
+
+		
+			z = 0;
+			tempWing[z] =[];
+			for (x = 1;x<=dimen;x++){
+				tempWing[z][x] = [];
+					tempWing[z][x][1] = arrayCube[aD[z]][x][sW][3];
+					tempWing[z][x][2] = arrayCube[aD[z]][x][sW][4];
+					tempWing[z][x][3] = arrayCube[aD[z]][x][sW][5];
+							
+			}
+			z = 1;
+			tempWing[z] =[];
+			for (x = 1;x<=dimen;x++){
+				tempWing[z][x] = [];
+				tempWing[z][x][1]= arrayCube[aD[z]][sW][x][3];
+				tempWing[z][x][2]= arrayCube[aD[z]][sW][x][4];
+				tempWing[z][x][3]= arrayCube[aD[z]][sW][x][5];
+
+				// arrayCube[aD[z]][sW][x][3]=0;
+				// arrayCube[aD[z]][sW][x][4]=0;
+				// arrayCube[aD[z]][sW][x][5]=0;
+				console.log(tempWing[z][1]);
+				console.log(tempWing[z][2]);
+				console.log(tempWing[z][3]);
+				console.log("\n")
+						
+			}
+			z =2;
+			tempWing[z]=[];
+			for (x = 1;x<=dimen;x++){
+				tempWing[z][x] = [];
+				tempWing[z][x][1] = arrayCube[aD[z]][x][(dimen-sW)+1][3];
+				tempWing[z][x][2] = arrayCube[aD[z]][x][(dimen-sW)+1][4];
+				tempWing[z][x][3] = arrayCube[aD[z]][x][(dimen-sW)+1][5];
+			}
+			z =3
+			tempWing[z]=[];
+			for (x = 1;x<=dimen;x++){
+				tempWing[z][x] = [];
+				tempWing[z][x][1] = arrayCube[aD[z]][(dimen-sW)+1][x][3];
+				tempWing[z][x][2] = arrayCube[aD[z]][(dimen-sW)+1][x][4];
+				tempWing[z][x][3] = arrayCube[aD[z]][(dimen-sW)+1][x][5];
+				
+				
+			}
+
+		//---------------------------------------------------
+		z = 0;
+		for (x = 1;x<=dimen;x++){
+				arrayCube[aD[z]][x][sW][3]=tempWing[z+1][(dimen-x)+1][1];
+				arrayCube[aD[z]][x][sW][4]=tempWing[z+1][(dimen-x)+1][2];
+				arrayCube[aD[z]][x][sW][5]=tempWing[z+1][(dimen-x)+1][3];
+		}
+		z = 1;
+		for (x = 1;x<=dimen;x++){
+				arrayCube[aD[z]][sW][x][3]=tempWing[z+1][x][1];
+				arrayCube[aD[z]][sW][x][4]=tempWing[z+1][x][2];
+				arrayCube[aD[z]][sW][x][5]=tempWing[z+1][x][3];
+		}
+		
+
+}
+ 	
+
+
+
+
+printArrayCube();
+function printArrayCube(){
+for (z = 0;z<dimenLet.length;z++){
+	for (x = 1;x<=dimen;x++){
+		for (y=1;y<=dimen;y++){
+			tpad.innerHTML += arrayCube[z][x][y][0] + ' ' +
+							  arrayCube[z][x][y][1] + ' ' +
+							  arrayCube[z][x][y][2] + ' ' + ':::'+
+							  arrayCube[z][x][y][3] + ' ' +
+							  arrayCube[z][x][y][4] + ' ' +
+							  arrayCube[z][x][y][5] + ' ' +
+							   '------';	
+		} 
+			tpad.innerHTML+='<br>';
+		}
+	tpad.innerHTML+='<br>';
+  }
+  tpad.innerHTML+='<br>';
+}
+
+
+tpad.innerHTML+='<br>';
+	
+	
+</script>
+</body>
+</html>
