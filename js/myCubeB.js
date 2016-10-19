@@ -32,7 +32,7 @@ var canvas1, context1, texture1;
 
 	material = new THREE.MeshBasicMaterial( {  transparent:false, opacity: 0.0,wireframe:false, color:0x000000  } );
 	camera = new THREE.PerspectiveCamera( 60, window.innerWidth / window.innerHeight, 0.1, 1000 );
-	camera.useQuaternion == true;
+	// camera.useQuaternion == true;
 
 	 init('0');
 
@@ -598,9 +598,9 @@ scene.updateMatrixWorld(true);
 			camera.position.z= 7.73261306595859;
 			
 			
-			camera.rotation.x= -0.6730479785136418;
-			camera.rotation.y= 0.6310664858727041;
-			camera.rotation.z= 0.4480982252579138;
+			// camera.rotation.x= -0.6730479785136418;
+			// camera.rotation.y= 0.6310664858727041;
+			// camera.rotation.z= 0.4480982252579138;
 	
 			// camera.position.set(7,6,7);
 
