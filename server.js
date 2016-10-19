@@ -41,8 +41,8 @@ var db_name = "b18_19015896_rubiksbattle";
 var connection = mysql.createConnection({  
   host     : 'sql311.byethost18.com',  
   user     : 'b18_19015896',  
-  password : '54072440',  
-  database : 'b18_19015896_rubiksbattle'
+  password : '54072440'
+  // database : 'b18_19015896_rubiksbattle'
 }); 
 
 connection.connect(function(err){
