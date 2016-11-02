@@ -1,7 +1,7 @@
 'use strict';
 
 const express = require('express');
-const socketIO = require('socket.io');
+
 const path = require('path');
 
 
@@ -28,8 +28,13 @@ const server = express()
   .listen(PORT, () => console.log(`Listening on ${ PORT }`));
 
 
-
+const socketIO = require('socket.io');
 const io = socketIO(server);
+
+io.set('transports', ['xhr-polling']);
+io.set("polling duration", 10);
+
+// io.set('log level',3);
 
 // var db_name = "b18_19015896_rubiksbattle";
 
