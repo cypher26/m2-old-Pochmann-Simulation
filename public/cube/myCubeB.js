@@ -7,7 +7,7 @@
 	var geometry, material, m, solidC;
 
 	dimension = 3;
-	var speed = 300;
+	var speed = 100;
 	var delayTime=0;
 	
  	//canvas

@@ -9,7 +9,7 @@
 
 
 	dimension1 = 3;
-	var speed1 = 400;
+	var speed1 = 100;
 	var delayTime1=0;
  	//canvas
  	container1 = document.createElement( 'div' );
