@@ -1,0 +1,259 @@
+
+<html>
+<head>
+   <script src="js/jquery.js"></script>
+   <script src="js/three.js"></script>
+   <script src="js/Projector.js"></script>
+   <script src='js/CanvasRenderer.js'></script>
+   <script src="js/TrackballControls.js"></script>
+     <script src="js/tween.min.js"></script> 
+     <script src="js/bindWithDelay.js"></script>
+     <script src="js/onDelay.js"></script>
+      <p id='server-time'></p>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+      var socket = io();
+      var el = document.getElementById('server-time');
+
+      socket.on('time', function(timeString) {
+        el.innerHTML = 'Server time: ' + timeString;
+      });
+
+
+       socket.emit('adduser', 'player1','11');
+    </script>
+     
+</head>
+
+
+  <body>
+    <div id='conversation'></div>
+
+    Name: <input  id='inputName' value='player1'></input><br>
+  <!--  Room: <input id='inputRoom'></input><br> -->
+
+    <!--<input type='submit'></input>-->
+    <!-- <button id='btnRegister'>Enter</button> -->
+
+<!--    <input id='inputMsg'></input> -->
+    <button id='btnSend'>Send</button>
+    
+    
+<div id='tpad'>
+
+</div>
+<input  type='text' placeholder='sample' id='inputAlg'></input>
+<button onClick="execCornerBufferAlg(document.getElementById('inputAlg').value);">Corner</button>
+<button onClick="execPerm(document.getElementById('inputAlg').value);">Move</button>
+<button onClick="execEdgeBufferAlg('');">Edge</button>
+
+<div id='players' >
+  <div id='player1' tabindex='1' style='border:1px solid; width:49%; height: 50%; float:left;'>Player1</div>
+  <div id='player2' tabindex='1' style='border:1px solid; width:49%; height: 50%; float:left;'>Player2</div>
+
+</div>
+
+
+
+</body>
+
+
+  <!-- // <script src="http://192.168.254.120:3000/socket.io/socket.io.js"></script> -->
+
+ 
+
+  <script>
+    // var socket=io.connect('http://192.168.254.120:3000');
+    // var scrambler =0;
+      jQuery(function($){
+        var roomID = '11';
+
+          // $( "#btnRegister" ).click(function() {
+                socket.emit('adduser', $('#inputName').val(),roomID);
+          //      $(this).attr("disabled", true);
+                
+          // });
+            
+            
+          $( "#btnSend" ).click(function() {
+            socket.emit('scrambleCube',$('#inputAlg').val()); 
+            execPerm($('#inputAlg').val());
+            init('1');
+            
+             socket.emit('scrambleCube1',$('#inputAlg').val()); 
+              execPerm1($('#inputAlg').val());
+            init1('1');
+            
+          });
+
+
+
+              // $(function() {
+              //    $('#player1').focus();
+              // });
+
+
+                  $(function() {
+                     $('#player1').focus();
+                  });
+
+            $('#player1').bind('keypress', function(event) {
+
+                   if ($('#inputName').val() == 'player2'){
+                       switch(event.keyCode){
+                         // var code = e.keyCode ? e.keyCode : e.which;
+                           case 70: checkNotation1('Fp'); break;
+                         case 102: checkNotation1('F'); break;
+                         case 66: checkNotation1('Bp'); break;
+                         case 98: checkNotation1('B'); break;
+                         case 85: checkNotation1('Up'); break;
+                         case 117: checkNotation1('U'); break;
+                         case 68: checkNotation1('Dp'); break;
+                         case 100: checkNotation1('D'); break;
+                         case 82: checkNotation1('Rp'); break;
+                         case 114: checkNotation1('R'); break;
+                         case 76: checkNotation1('Lp'); break;
+                         case 108: checkNotation1('L'); break;
+                         case 88: checkNotation1('xp'); break;
+                         case 120: checkNotation1('x'); break;
+                         case 89: checkNotation1('yp'); break;
+                           case 121:  checkNotation1('y'); break;
+                         case 90: checkNotation1('zp'); break; 
+                           case 122: checkNotation1('z'); break;
+
+                        }
+                  }
+                  else if ($('#inputName').val() == 'player1'){
+                       switch(event.keyCode){
+                        case 77: checkNotation('Mp'); break;
+                        case 109: checkNotation('M'); break;
+
+                        case 69: checkNotation('Ep'); break;
+                        case 101: checkNotation('E'); break;
+
+                        case 83: checkNotation('Sp'); break;
+                        case 115: checkNotation('S'); break;
+
+                        case 70: checkNotation('Fp'); break;
+                         case 102: checkNotation('F'); break;
+                         case 66: checkNotation('Bp'); break;
+                         case 98: checkNotation('B'); break;
+                         case 85: checkNotation('Up'); break;
+                         case 117: checkNotation('U'); break;
+                         case 68: checkNotation('Dp'); break;
+                         case 100: checkNotation('D'); break;
+                         case 82: checkNotation('Rp'); break;
+                         case 114: checkNotation('R'); break;
+                         case 76: checkNotation('Lp'); break;
+                         case 108: checkNotation('L'); break;
+                         case 88: checkNotation('xp'); break;
+                         case 120: checkNotation('x'); break;
+                         case 89: checkNotation('yp'); break;
+                           case 121:  checkNotation('y'); break;
+                         case 90: checkNotation('zp'); break; 
+                           case 122: checkNotation('z'); break;
+                           }
+                  }
+              });
+
+
+              // $('#player1').bind('keypress', function(event) {
+
+                
+                
+              //        switch(event.keyCode){
+              //          //actions for the keys
+              //        // var code = e.keyCode ? e.keyCode : e.which;
+                       
+              //           case 70: socket.emit('sendAlg','Fp'); break;
+              //         case 102: socket.emit('sendAlg','F'); break;
+              //         case 66: socket.emit('sendAlg','Bp'); break;
+              //         case 98: socket.emit('sendAlg','B'); break;
+              //         case 85: socket.emit('sendAlg','Up'); break;
+              //         case 117: socket.emit('sendAlg','U'); break;
+              //         case 68: socket.emit('sendAlg','Dp'); break;
+              //         case 100: socket.emit('sendAlg','D'); break;
+              //         case 82: socket.emit('sendAlg','Rp'); break;
+              //         case 114: socket.emit('sendAlg','R'); break;
+              //         case 76: socket.emit('sendAlg','Lp'); break;
+              //         case 108: socket.emit('sendAlg','L'); break;
+              //         case 88: socket.emit('sendAlg','xp'); break;
+              //         case 120: socket.emit('sendAlg','x'); break;
+              //         case 89:  socket.emit('sendAlg','yp'); break;
+              //           case 121: socket.emit('sendAlg','y'); break;
+              //         case 90:  socket.emit('sendAlg','zp'); break; 
+              //           case 122: socket.emit('sendAlg','z'); break;
+
+              //        }
+                    
+              // });
+            socket.on('scrambleC', function(data){
+              
+              // if ( $('#inputName').val() == 'user'){
+                execPerm(data);
+                init('1');
+                execPerm1(data);
+                init1('1');
+            
+            
+              // }
+            }); 
+
+            // socket.on('scrambleC1', function(data){
+              
+            //  if ( $('#inputName').val() == 'user'){
+            //    execPerm1(data);
+            //    init1('1');
+            
+            //  }
+            // });
+        
+            socket.on('playerPixels1', function (data){
+              if ($('#inputName').val() == 'player1' || $('#inputName').val() == 'user'){
+                for (var x=0;x<dimension1;x++){
+                      for (var y = 0;y<(dimension1*dimension1);y++){
+                     solidC1[x][y].position.setFromMatrixPosition(data[x][y] ); //ok
+                   solidC1[x][y].setRotationFromMatrix(data[x][y]);
+                  }
+                }
+                renderer1.render(scene1,camera1);
+
+              }
+            });
+            socket.on('playerPixels', function (data){
+          
+              if ($('#inputName').val() == 'player2' || $('#inputName').val() == 'user'){
+                for (var x=0;x<dimension;x++){
+                    
+                      for (var y = 0;y<(dimension*dimension);y++){
+                     solidC[x][y].position.setFromMatrixPosition(data[x][y] ); //ok
+                   solidC[x][y].setRotationFromMatrix(data[x][y]);
+                  }
+                }
+                renderer.render(scene,camera);
+              }
+
+            });
+
+          // socket.on('updatePlayer1', function (data) {
+          //  checkNotation(data);
+          // });
+          // socket.on('updatePlayer2', function (data) {
+          //  checkNotation1(data);
+          // });
+
+      });
+
+  </script>
+
+
+<script src="cube/matrixManip.js"></script>
+<script src='cube/matrixManip2.js'></script>
+  <script src='cube/myCubeB.js'></script>
+    <script src='cube/myInitB.js'></script>
+    <script src='cube/myCubeB2.js'></script>
+    <script src='cube/myInitB2.js'></script>
+    
+
+
+</html>
