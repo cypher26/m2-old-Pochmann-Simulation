@@ -16,9 +16,11 @@ router.get("/",function(req,res){
   res.sendFile(__dirname + "/public/index.html");
 });
 
+
+router.use("/",express.static(__dirname + '/public'));
 const server = express()
 	.use("/",router)
-	.use("/",express.static(__dirname + '/public'))
+	// .use("/",express.static(__dirname + '/public'))
 	.use("/node_modules/angular/",express.static(__dirname + '/node_modules/angular/'))
   // .use(function(req, res) {
   // 		res.sendFile(INDEX); 
