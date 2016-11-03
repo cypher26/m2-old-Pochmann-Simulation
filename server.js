@@ -65,68 +65,68 @@ console.log('hi');
 var arrayUser = [];
 
 
-io.sockets.on('connection', function (socket) {
+// io.sockets.on('connection', function (socket) {
 
-  socket.on('adduser', function(username, room){
-      // store the username in the socket session for this client
-      socket.username = username;
-      // store the room name in the socket session for this client
-      socket.room = room;
-      // add the client's username to the global list
-      socket.join(room);
-      console.log(username + " " + "entered the room" + " " + arrayUser.length);
-      // arrayUser[arrayUser.length] = username;
-      // echo to client they've connected
-      //socket.emit('updatechat', socket.username , 'entered the ' + socket.room);
-      // echo to room 1 that a person has connected to their room
-      //io.sockets.in(socket.room).emit('updatechat', socket.username, ' entered the ' + socket.room);
+//   socket.on('adduser', function(username, room){
+//       // store the username in the socket session for this client
+//       socket.username = username;
+//       // store the room name in the socket session for this client
+//       socket.room = room;
+//       // add the client's username to the global list
+//       socket.join(room);
+//       console.log(username + " " + "entered the room" + " " + arrayUser.length);
+//       // arrayUser[arrayUser.length] = username;
+//       // echo to client they've connected
+//       //socket.emit('updatechat', socket.username , 'entered the ' + socket.room);
+//       // echo to room 1 that a person has connected to their room
+//       //io.sockets.in(socket.room).emit('updatechat', socket.username, ' entered the ' + socket.room);
 
 
-      //socket.broadcast.to('room1').emit('updatechat', 'SERVER', username + ' has connected to this room');
+//       //socket.broadcast.to('room1').emit('updatechat', 'SERVER', username + ' has connected to this room');
 
-      //socket.emit('updaterooms', rooms, 'room1');
-  });
+//       //socket.emit('updaterooms', rooms, 'room1');
+//   });
   
 
-    // socket.join(12);
-  socket.on('scrambleCube', function (data){
-    //io.sockets.in(socket.room).emit('scrambleC',data);
+//     // socket.join(12);
+//   socket.on('scrambleCube', function (data){
+//     //io.sockets.in(socket.room).emit('scrambleC',data);
 
-    socket.broadcast.to(socket.room).emit('scrambleC',data);
+//     socket.broadcast.to(socket.room).emit('scrambleC',data);
 
-  });
-  socket.on('disconnect', function(){
-    console.log(socket.username + " " + 'has leaved');
-  });
+//   });
+//   socket.on('disconnect', function(){
+//     console.log(socket.username + " " + 'has leaved');
+//   });
 
-  // socket.on('scrambleCube1', function (data){
-  //  //io.sockets.in(socket.room).emit('scrambleC1',data);
-  //  socket.broadcast.to(socket.room).emit('scrambleC1',data);
-  // });
-
-
-
-  socket.on('updatePixels', function (data){
-    io.sockets.in(socket.room).emit('playerPixels',data);
-  });
-  socket.on('updatePixels1', function (data){
-    io.sockets.in(socket.room).emit('playerPixels1',data);
-  });
+//   // socket.on('scrambleCube1', function (data){
+//   //  //io.sockets.in(socket.room).emit('scrambleC1',data);
+//   //  socket.broadcast.to(socket.room).emit('scrambleC1',data);
+//   // });
 
 
 
-  // socket.on('sendAlg', function (data) {
+//   socket.on('updatePixels', function (data){
+//     io.sockets.in(socket.room).emit('playerPixels',data);
+//   });
+//   socket.on('updatePixels1', function (data){
+//     io.sockets.in(socket.room).emit('playerPixels1',data);
+//   });
+
+
+
+//   // socket.on('sendAlg', function (data) {
   
-  // if (socket.username == 'player1'){
-  //  io.sockets.in(socket.room).emit('updatePlayer1', data);
-  // }
-  // else if (socket.username == 'player2'){
-  //  io.sockets.in(socket.room).emit('updatePlayer2', data);
-  // }
-  // });
+//   // if (socket.username == 'player1'){
+//   //  io.sockets.in(socket.room).emit('updatePlayer1', data);
+//   // }
+//   // else if (socket.username == 'player2'){
+//   //  io.sockets.in(socket.room).emit('updatePlayer2', data);
+//   // }
+//   // });
   
 
-});
+// });
 
 
 // io.on('connection', (socket) => {
