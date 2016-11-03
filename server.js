@@ -31,8 +31,14 @@ const server = express()
 const socketIO = require('socket.io');
 const io = socketIO(server);
 
-io.set('transports', ['xhr-polling']);
-io.set("polling duration", 10);
+// io.set('transports', ['websocket']);
+// io.set('transports', ['xhr-polling']);
+// io.set("polling duration", 10);
+
+// io.on('connection', function () {
+// io.set("transports", ["xhr-polling"]);
+// io.set("polling duration", 10);
+// });
 
 // io.set('log level',3);
 

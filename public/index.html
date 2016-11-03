@@ -12,7 +12,18 @@
       <p id='server-time'></p>
     <script src="/socket.io/socket.io.js"></script>
     <script>
-      var socket = io();
+      // var socket = io();
+      // var socket = io({transports: ['xhr-polling'], upgrade: false});
+      var socket = io({
+            transports: [
+              'websocket', 
+              'flashsocket', 
+              'htmlfile', 
+              'xhr-polling', 
+              'jsonp-polling', 
+              'polling'
+            ]
+          });
       var el = document.getElementById('server-time');
 
       socket.on('time', function(timeString) {
